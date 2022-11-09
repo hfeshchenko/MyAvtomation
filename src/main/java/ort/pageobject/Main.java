@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ort.pageobject.moduls.BaseModule;
+import ort.pageobject.moduls.BuyModule;
 import ort.pageobject.moduls.ProductModule;
 
 import java.time.Duration;
@@ -18,6 +19,7 @@ public class Main {
 
 
     public static void main(String[] args) throws InterruptedException {
+        final By basketLeft= By.xpath("//button[@class='header__button ng-star-inserted header__button--active']");
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -31,18 +33,18 @@ public class Main {
         findFieldButton.click();
         Thread.sleep(5000);
         WebElement basketProduct = driver.findElement(By.xpath("//button[@class='buy-button goods-tile__buy-button ng-star-inserted']"));
-
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         basketProduct.click();
 
-        WebElement basketLeft = driver.findElement(By.xpath("//button[@class='header__button ng-star-inserted header__button--active']"));
-        Thread.sleep(5000);
-        basketLeft.click();
+
+
+        BuyModule buyModule=new BuyModule(driver);
+        buyModule.findElement("//button[@class='header__button ng-star-inserted header__button--active']").click();
+
         WebElement productBuy=driver.findElement(By.xpath("//*[@class='cart-product__main']"));
-        String ValueMachine=productBuy.getAttribute(driver.getTitle());
+        String ValueMachine=productBuy.getAttribute("title");
 
-        int n=1;
-
+        int v=1;
 
 
 
